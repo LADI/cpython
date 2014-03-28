@@ -24,7 +24,7 @@ http://bugs.python.org/issue6103
  
  bininstall: altbininstall
  	-if test -f $(DESTDIR)$(BINDIR)/python3$(EXE) -o -h $(DESTDIR)$(BINDIR)/python3$(EXE); \
-@@ -1199,18 +1212,6 @@
+@@ -1200,18 +1213,6 @@
  		else	true; \
  		fi; \
  	done

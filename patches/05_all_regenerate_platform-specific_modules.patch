@@ -79,7 +79,7 @@ http://bugs.python.org/issue12619
  # Build static library
  # avoid long command lines, same as LIBRARY_OBJS
  $(LIBRARY): $(LIBRARY_OBJS)
-@@ -1073,7 +1099,7 @@
+@@ -1074,7 +1100,7 @@
  		unittest unittest/test unittest/test/testmock \
  		venv venv/scripts venv/scripts/posix \
  		curses pydoc_data $(MACHDEPS)
@@ -88,7 +88,7 @@ http://bugs.python.org/issue12619
  	@for i in $(SCRIPTDIR) $(LIBDEST); \
  	do \
  		if test ! -d $(DESTDIR)$$i; then \
-@@ -1156,23 +1182,6 @@
+@@ -1157,23 +1183,6 @@
  	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
  		$(PYTHON_FOR_BUILD) -m lib2to3.pgen2.driver $(DESTDIR)$(LIBDEST)/lib2to3/PatternGrammar.txt
  
@@ -112,7 +112,7 @@ http://bugs.python.org/issue12619
  python-config: $(srcdir)/Misc/python-config.in
  	# Substitution happens here, as the completely-expanded BINDIR
  	# is not available in configure
-@@ -1475,7 +1484,7 @@
+@@ -1476,7 +1485,7 @@
  Python/thread.o: @THREADHEADERS@
  
  # Declare targets that aren't real files

@@ -38,7 +38,7 @@ python_generate_wrapper_scripts() to check if Python supports GENTOO_PYTHON_TARG
  
 --- Modules/posixmodule.c
 +++ Modules/posixmodule.c
-@@ -1158,6 +1158,10 @@
+@@ -1157,6 +1157,10 @@
          char *p = strchr(*e, '=');
          if (p == NULL)
              continue;
@@ -97,7 +97,7 @@ python_generate_wrapper_scripts() to check if Python supports GENTOO_PYTHON_TARG
          PyMem_Free(argv_copy2[i]);
 --- Python/sysmodule.c
 +++ Python/sysmodule.c
-@@ -1779,6 +1779,10 @@
+@@ -1778,6 +1778,10 @@
  makeargvobject(int argc, wchar_t **argv)
  {
      PyObject *av;
@@ -108,7 +108,7 @@ python_generate_wrapper_scripts() to check if Python supports GENTOO_PYTHON_TARG
      if (argc <= 0 || argv == NULL) {
          /* Ensure at least one (empty) argument is seen */
          static wchar_t *empty_argv[1] = {L""};
-@@ -1803,7 +1807,16 @@
+@@ -1802,7 +1806,16 @@
              } else
                  v = PyUnicode_FromString(argv[i]);
  #else
@@ -126,7 +126,7 @@ python_generate_wrapper_scripts() to check if Python supports GENTOO_PYTHON_TARG
  #endif
              if (v == NULL) {
                  Py_DECREF(av);
-@@ -1823,7 +1836,12 @@
+@@ -1822,7 +1835,12 @@
  static void
  sys_update_path(int argc, wchar_t **argv)
  {
@@ -140,7 +140,7 @@ python_generate_wrapper_scripts() to check if Python supports GENTOO_PYTHON_TARG
      wchar_t *p = NULL;
      Py_ssize_t n = 0;
      PyObject *a;
-@@ -1843,7 +1861,14 @@
+@@ -1842,7 +1860,14 @@
      if (path == NULL)
          return;
  
@@ -156,7 +156,7 @@ python_generate_wrapper_scripts() to check if Python supports GENTOO_PYTHON_TARG
  
  #ifdef HAVE_READLINK
      if (_HAVE_SCRIPT_ARGUMENT(argc, argv))
-@@ -1920,6 +1945,7 @@
+@@ -1919,6 +1944,7 @@
      if (PyList_Insert(path, 0, a) < 0)
          Py_FatalError("sys.path.insert(0) failed");
      Py_DECREF(a);
