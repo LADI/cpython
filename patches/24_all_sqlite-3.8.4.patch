@@ -1,5 +1,5 @@
 http://bugs.python.org/issue20901
-http://hg.python.org/cpython/rev/dbc9e3ed5e9f
+http://hg.python.org/cpython/rev/4d626a9df062
 
 --- Lib/sqlite3/test/hooks.py
 +++ Lib/sqlite3/test/hooks.py
