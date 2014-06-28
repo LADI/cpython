@@ -21,7 +21,7 @@ http://bugs.python.org/issue6731
              failed = self.failed[:]
              print
              print "Failed to build these modules:"
-@@ -2237,6 +2241,7 @@
+@@ -2241,6 +2245,7 @@
                       'Tools/scripts/2to3',
                       'Lib/smtpd.py']
          )
