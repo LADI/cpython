@@ -112,7 +112,7 @@ http://bugs.python.org/issue12619
  python-config: $(srcdir)/Misc/python-config.in Misc/python-config.sh
  	# Substitution happens here, as the completely-expanded BINDIR
  	# is not available in configure
-@@ -1595,7 +1604,7 @@
+@@ -1596,7 +1605,7 @@
  Python/thread.o: @THREADHEADERS@
  
  # Declare targets that aren't real files

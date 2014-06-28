@@ -2,7 +2,7 @@ http://bugs.python.org/issue1674555
 
 --- Lib/site.py
 +++ Lib/site.py
-@@ -540,8 +540,9 @@
+@@ -545,8 +545,9 @@
      known_paths = venv(known_paths)
      if ENABLE_USER_SITE is None:
          ENABLE_USER_SITE = check_enableusersite()

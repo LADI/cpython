@@ -21,7 +21,7 @@ http://bugs.python.org/issue6731
              failed = self.failed[:]
              print()
              print("Failed to build these modules:")
-@@ -2219,6 +2223,7 @@
+@@ -2229,6 +2233,7 @@
            scripts = ["Tools/scripts/pydoc3", "Tools/scripts/idle3",
                       "Tools/scripts/2to3", "Tools/scripts/pyvenv"]
          )
