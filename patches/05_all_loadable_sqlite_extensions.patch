@@ -3,7 +3,7 @@ http://bugs.python.org/issue10268
 
 --- configure.ac
 +++ configure.ac
-@@ -2310,6 +2310,15 @@
+@@ -2326,6 +2326,15 @@
    TCLTK_LIBS="$with_tcltk_libs"
  fi
  
@@ -21,7 +21,7 @@ http://bugs.python.org/issue10268
  AC_ARG_WITH(dbmliborder,
 --- setup.py
 +++ setup.py
-@@ -1184,8 +1184,10 @@
+@@ -1183,8 +1183,10 @@
              else:
                  sqlite_defines.append(('MODULE_NAME', '\\"sqlite3\\"'))
  

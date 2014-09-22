@@ -137,6 +137,15 @@
  #
 --- setup.py
 +++ setup.py
+@@ -450,7 +450,7 @@
+         global disable_ssl
+         # Ensure that /usr/local is always used
+         if not cross_compiling:
+-            add_dir_to_list(self.compiler.library_dirs, '/usr/local/lib')
++            add_dir_to_list(self.compiler.library_dirs, '/usr/local/@@GENTOO_LIBDIR@@')
+             add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
+         if cross_compiling:
+             self.add_gcc_paths()
 @@ -517,8 +517,7 @@
                  ):
                  add_dir_to_list(inc_dirs, d)
@@ -147,7 +156,7 @@
                  ):
                  add_dir_to_list(lib_dirs, d)
          exts = []
-@@ -770,11 +769,11 @@
+@@ -772,11 +771,11 @@
              elif curses_library:
                  readline_libs.append(curses_library)
              elif self.compiler.find_library_file(lib_dirs +
@@ -161,3 +170,45 @@
                                     extra_link_args=readline_extra_link_args,
                                     libraries=readline_libs) )
          else:
+@@ -1042,8 +1041,7 @@
+ 
+                 # check lib directories parallel to the location of the header
+                 db_dirs_to_check = [
+-                    db_incdir.replace("include", 'lib64'),
+-                    db_incdir.replace("include", 'lib'),
++                    db_incdir.replace("include", '@@GENTOO_LIBDIR@@'),
+                 ]
+ 
+                 if host_platform != 'darwin':
+@@ -1156,10 +1154,8 @@
+ 
+         if sqlite_incdir:
+             sqlite_dirs_to_check = [
+-                os.path.join(sqlite_incdir, '..', 'lib64'),
+-                os.path.join(sqlite_incdir, '..', 'lib'),
+-                os.path.join(sqlite_incdir, '..', '..', 'lib64'),
+-                os.path.join(sqlite_incdir, '..', '..', 'lib'),
++                os.path.join(sqlite_incdir, '..', '@@GENTOO_LIBDIR@@'),
++                os.path.join(sqlite_incdir, '..', '..', '@@GENTOO_LIBDIR@@'),
+             ]
+             sqlite_libfile = self.compiler.find_library_file(
+                                 sqlite_dirs_to_check + lib_dirs, 'sqlite3')
+@@ -1931,15 +1927,14 @@
+             added_lib_dirs.append('/usr/openwin/lib')
+         elif os.path.exists('/usr/X11R6/include'):
+             include_dirs.append('/usr/X11R6/include')
+-            added_lib_dirs.append('/usr/X11R6/lib64')
+-            added_lib_dirs.append('/usr/X11R6/lib')
++            added_lib_dirs.append('/usr/X11R6/@@GENTOO_LIBDIR@@')
+         elif os.path.exists('/usr/X11R5/include'):
+             include_dirs.append('/usr/X11R5/include')
+-            added_lib_dirs.append('/usr/X11R5/lib')
++            added_lib_dirs.append('/usr/X11R5/@@GENTOO_LIBDIR@@')
+         else:
+             # Assume default location for X11
+             include_dirs.append('/usr/X11/include')
+-            added_lib_dirs.append('/usr/X11/lib')
++            added_lib_dirs.append('/usr/X11/@@GENTOO_LIBDIR@@')
+ 
+         # If Cygwin, then verify that X is installed before proceeding
+         if host_platform == 'cygwin':

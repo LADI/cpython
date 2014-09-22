@@ -74,7 +74,7 @@ http://bugs.python.org/issue1674555
      def accumulate_result(test, result):
          ok, test_time = result
          test_times.append((test_time, test))
-@@ -485,19 +529,13 @@
+@@ -489,19 +533,13 @@
              print "Multiprocess option requires thread support"
              sys.exit(2)
          from Queue import Queue
@@ -96,7 +96,7 @@ http://bugs.python.org/issue1674555
          def work():
              # A worker thread.
              try:
-@@ -560,15 +598,15 @@
+@@ -571,15 +609,15 @@
              if trace:
                  # If we're tracing code coverage, then we don't exit with status
                  # if on a false return value from main.
@@ -115,7 +115,7 @@ http://bugs.python.org/issue1674555
                  except KeyboardInterrupt:
                      interrupted = True
                      break
-@@ -638,7 +676,7 @@
+@@ -649,7 +687,7 @@
              sys.stdout.flush()
              try:
                  test_support.verbose = True
@@ -124,7 +124,7 @@ http://bugs.python.org/issue1674555
              except KeyboardInterrupt:
                  # print a newline separate from the ^C
                  print
-@@ -847,8 +885,9 @@
+@@ -858,8 +896,9 @@
          for name, get, restore in self.resource_info():
              current = get()
              original = saved_values.pop(name)
@@ -158,7 +158,7 @@ http://bugs.python.org/issue1674555
  
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -794,7 +794,7 @@
+@@ -804,7 +804,7 @@
  
  TESTOPTS=	-l $(EXTRATESTOPTS)
  TESTPROG=	$(srcdir)/Lib/test/regrtest.py
