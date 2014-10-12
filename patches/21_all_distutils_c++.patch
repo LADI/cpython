@@ -1,4 +1,4 @@
-http://bugs.python.org/issue1222585
+https://bugs.python.org/issue1222585
 
 --- Lib/distutils/cygwinccompiler.py
 +++ Lib/distutils/cygwinccompiler.py
@@ -60,7 +60,7 @@ http://bugs.python.org/issue1222585
          # dlls need another dll (mingwm10.dll see Mingw32 docs)
 --- Lib/distutils/sysconfig.py
 +++ Lib/distutils/sysconfig.py
-@@ -184,9 +184,12 @@
+@@ -182,9 +182,12 @@
                  _osx_support.customize_compiler(_config_vars)
                  _config_vars['CUSTOMIZED_OSX_COMPILER'] = 'True'
  
@@ -76,7 +76,7 @@ http://bugs.python.org/issue1222585
  
          if 'CC' in os.environ:
              newcc = os.environ['CC']
-@@ -201,19 +204,27 @@
+@@ -199,19 +202,27 @@
              cxx = os.environ['CXX']
          if 'LDSHARED' in os.environ:
              ldshared = os.environ['LDSHARED']
@@ -105,7 +105,7 @@ http://bugs.python.org/issue1222585
          if 'AR' in os.environ:
              ar = os.environ['AR']
          if 'ARFLAGS' in os.environ:
-@@ -222,13 +233,17 @@
+@@ -220,13 +231,17 @@
              archiver = ar + ' ' + ar_flags
  
          cc_cmd = cc + ' ' + cflags
@@ -229,7 +229,7 @@ http://bugs.python.org/issue1222585
  _INITPRE = '_OSX_SUPPORT_INITIAL_'
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -553,7 +553,7 @@
+@@ -568,7 +568,7 @@
  	    *\ -s*|s*) quiet="-q";; \
  	    *) quiet="";; \
  	esac; \

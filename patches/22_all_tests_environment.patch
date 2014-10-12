@@ -1,4 +1,4 @@
-http://bugs.python.org/issue1674555
+https://bugs.python.org/issue1674555
 
 --- Lib/site.py
 +++ Lib/site.py
@@ -165,7 +165,7 @@ http://bugs.python.org/issue1674555
      os.makedirs(site.USER_SITE)
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -944,7 +944,7 @@
+@@ -959,7 +959,7 @@
  ######################################################################
  
  TESTOPTS=	$(EXTRATESTOPTS)
