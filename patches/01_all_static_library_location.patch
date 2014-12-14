@@ -1,10 +1,10 @@
 Install libpythonX.Y.a in /usr/lib instead of /usr/lib/pythonX.Y/config.
 https://bugs.gentoo.org/show_bug.cgi?id=252372
-http://bugs.python.org/issue6103
+https://bugs.python.org/issue6103
 
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -902,6 +902,19 @@
+@@ -924,6 +924,19 @@
  		fi; \
  	else	true; \
  	fi
@@ -24,7 +24,7 @@ http://bugs.python.org/issue6103
  
  # Install the versioned manual page
  altmaninstall:
-@@ -1098,18 +1111,6 @@
+@@ -1121,18 +1134,6 @@
  		else	true; \
  		fi; \
  	done
@@ -45,10 +45,10 @@ http://bugs.python.org/issue6103
  	$(INSTALL_DATA) $(srcdir)/Modules/config.c.in $(DESTDIR)$(LIBPL)/config.c.in
 --- Misc/python-config.in
 +++ Misc/python-config.in
-@@ -46,11 +46,7 @@
-     elif opt in ('--libs', '--ldflags'):
-         libs = getvar('LIBS').split() + getvar('SYSLIBS').split()
-         libs.append('-lpython'+pyver)
+@@ -47,11 +47,7 @@
+         libs = ['-lpython' + pyver]
+         libs += getvar('LIBS').split()
+         libs += getvar('SYSLIBS').split()
 -        # add the prefix/lib/pythonX.Y/config dir, but only if there is no
 -        # shared library in prefix/lib/.
          if opt == '--ldflags':

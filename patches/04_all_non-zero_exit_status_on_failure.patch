@@ -1,5 +1,5 @@
 https://bugs.gentoo.org/show_bug.cgi?id=281968
-http://bugs.python.org/issue6731
+https://bugs.python.org/issue6731
 
 --- setup.py
 +++ setup.py
@@ -12,16 +12,18 @@ http://bugs.python.org/issue6731
  def add_dir_to_list(dirlist, dir):
      """Add the directory 'dir' to the list 'dirlist' (at the front) if
      1) 'dir' is not already in 'dirlist'
-@@ -284,6 +286,8 @@
+@@ -285,7 +287,10 @@
+                    " detect_modules() for the module's name.")
              print
  
++        global exit_status
++
          if self.failed:
-+            global exit_status
 +            exit_status = 1
              failed = self.failed[:]
              print
              print "Failed to build these modules:"
-@@ -2239,6 +2243,7 @@
+@@ -2241,6 +2246,7 @@
                       'Tools/scripts/2to3',
                       'Lib/smtpd.py']
          )

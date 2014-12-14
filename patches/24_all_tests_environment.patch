@@ -1,4 +1,4 @@
-http://bugs.python.org/issue1674555
+https://bugs.python.org/issue1674555
 
 --- Lib/site.py
 +++ Lib/site.py
@@ -158,7 +158,7 @@ http://bugs.python.org/issue1674555
  
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -804,7 +804,7 @@
+@@ -807,7 +807,7 @@
  
  TESTOPTS=	-l $(EXTRATESTOPTS)
  TESTPROG=	$(srcdir)/Lib/test/regrtest.py

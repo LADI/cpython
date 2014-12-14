@@ -85,7 +85,7 @@ python_generate_wrapper_scripts() to check if Python supports GENTOO_PYTHON_TARG
  }
 --- Python/sysmodule.c
 +++ Python/sysmodule.c
-@@ -1573,6 +1573,10 @@
+@@ -1578,6 +1578,10 @@
  makeargvobject(int argc, char **argv)
  {
      PyObject *av;
@@ -96,7 +96,7 @@ python_generate_wrapper_scripts() to check if Python supports GENTOO_PYTHON_TARG
      if (argc <= 0 || argv == NULL) {
          /* Ensure at least one (empty) argument is seen */
          static char *empty_argv[1] = {""};
-@@ -1597,7 +1601,11 @@
+@@ -1602,7 +1606,11 @@
              } else
                  v = PyString_FromString(argv[i]);
  #else
@@ -109,7 +109,7 @@ python_generate_wrapper_scripts() to check if Python supports GENTOO_PYTHON_TARG
  #endif
              if (v == NULL) {
                  Py_DECREF(av);
-@@ -1625,7 +1633,15 @@
+@@ -1630,7 +1638,15 @@
      if (PySys_SetObject("argv", av) != 0)
          Py_FatalError("can't assign sys.argv");
      if (updatepath && path != NULL) {
