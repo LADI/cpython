@@ -4,7 +4,7 @@ https://bugs.python.org/issue6103
 
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -924,6 +924,19 @@
+@@ -954,6 +954,19 @@
  		fi; \
  	else	true; \
  	fi
@@ -24,7 +24,7 @@ https://bugs.python.org/issue6103
  
  # Install the versioned manual page
  altmaninstall:
-@@ -1121,18 +1134,6 @@
+@@ -1151,18 +1164,6 @@
  		else	true; \
  		fi; \
  	done

@@ -3,7 +3,7 @@ https://bugs.python.org/issue1762561
 
 --- Objects/floatobject.c
 +++ Objects/floatobject.c
-@@ -1850,9 +1850,18 @@
+@@ -1859,9 +1859,18 @@
  /* this is for the benefit of the pack/unpack routines below */
  
  typedef enum {
@@ -23,7 +23,7 @@ https://bugs.python.org/issue1762561
  static float_format_type double_format, float_format;
  static float_format_type detected_double_format, detected_float_format;
  
-@@ -1889,6 +1898,8 @@
+@@ -1898,6 +1907,8 @@
          return PyString_FromString("IEEE, little-endian");
      case ieee_big_endian_format:
          return PyString_FromString("IEEE, big-endian");
@@ -32,7 +32,7 @@ https://bugs.python.org/issue1762561
      default:
          Py_FatalError("insane float_format or double_format");
          return NULL;
-@@ -1902,8 +1913,9 @@
+@@ -1911,8 +1922,9 @@
  "used in Python's test suite.\n"
  "\n"
  "typestr must be 'double' or 'float'.  This function returns whichever of\n"
@@ -44,7 +44,7 @@ https://bugs.python.org/issue1762561
  
  static PyObject *
  float_setformat(PyTypeObject *v, PyObject* args)
-@@ -1941,11 +1953,15 @@
+@@ -1950,11 +1962,15 @@
      else if (strcmp(format, "IEEE, big-endian") == 0) {
          f = ieee_big_endian_format;
      }
@@ -62,7 +62,7 @@ https://bugs.python.org/issue1762561
          return NULL;
  
      }
-@@ -1968,8 +1984,10 @@
+@@ -1977,8 +1993,10 @@
  "used in Python's test suite.\n"
  "\n"
  "typestr must be 'double' or 'float'.  fmt must be one of 'unknown',\n"
@@ -75,7 +75,7 @@ https://bugs.python.org/issue1762561
  "\n"
  "Override the automatic determination of C-level floating point type.\n"
  "This affects how floats are converted to and from binary strings.");
-@@ -2164,7 +2182,11 @@
+@@ -2173,7 +2191,11 @@
         Note that if we're on some whacked-out platform which uses
         IEEE formats but isn't strictly little-endian or big-
         endian, we will fall back to the portable shifts & masks
@@ -88,7 +88,7 @@ https://bugs.python.org/issue1762561
  
  #if SIZEOF_DOUBLE == 8
      {
-@@ -2173,6 +2195,8 @@
+@@ -2182,6 +2204,8 @@
              detected_double_format = ieee_big_endian_format;
          else if (memcmp(&x, "\x05\x04\x03\x02\x01\xff\x3f\x43", 8) == 0)
              detected_double_format = ieee_little_endian_format;
@@ -97,7 +97,7 @@ https://bugs.python.org/issue1762561
          else
              detected_double_format = unknown_format;
      }
-@@ -2518,17 +2542,31 @@
+@@ -2527,17 +2551,31 @@
      }
      else {
          const char *s = (char*)&x;
@@ -137,7 +137,7 @@ https://bugs.python.org/issue1762561
          }
          return 0;
      }
-@@ -2687,22 +2725,33 @@
+@@ -2696,22 +2734,33 @@
      }
      else {
          double x;

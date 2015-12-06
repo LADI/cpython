@@ -86,7 +86,7 @@
              # other platforms
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -106,7 +106,7 @@
+@@ -111,7 +111,7 @@
  MANDIR=		@mandir@
  INCLUDEDIR=	@includedir@
  CONFINCLUDEDIR=	$(exec_prefix)/include
@@ -95,6 +95,17 @@
  
  # Detailed destination directories
  BINLIBDEST=	$(LIBDIR)/python$(VERSION)
+--- Modules/Setup.dist
++++ Modules/Setup.dist
+@@ -464,7 +464,7 @@
+ # Andrew Kuchling's zlib module.
+ # This require zlib 1.1.3 (or later).
+ # See http://www.gzip.org/zlib/
+-#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz
++#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/@@GENTOO_LIBDIR@@ -lz
+ 
+ # Interface to the Expat XML parser
+ #
 --- Modules/getpath.c
 +++ Modules/getpath.c
 @@ -129,7 +129,7 @@
@@ -124,17 +135,6 @@
      }
      /* If we found EXEC_PREFIX do *not* reduce it!  (Yet.) */
  
---- Modules/Setup.dist
-+++ Modules/Setup.dist
-@@ -464,7 +464,7 @@
- # Andrew Kuchling's zlib module.
- # This require zlib 1.1.3 (or later).
- # See http://www.gzip.org/zlib/
--#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz
-+#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/@@GENTOO_LIBDIR@@ -lz
- 
- # Interface to the Expat XML parser
- #
 --- setup.py
 +++ setup.py
 @@ -452,7 +452,7 @@
