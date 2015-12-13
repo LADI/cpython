@@ -1,14 +1,3 @@
---- configure.ac
-+++ configure.ac
-@@ -4331,7 +4331,7 @@
- 
- dnl define LIBPL after ABIFLAGS and LDVERSION is defined.
- AC_SUBST(PY_ENABLE_SHARED)
--LIBPL='$(prefix)'"/lib/python${VERSION}/config-${LDVERSION}"
-+LIBPL='$(prefix)'"/@@GENTOO_LIBDIR@@/python${VERSION}/config-${LDVERSION}"
- AC_SUBST(LIBPL)
- 
- # Check whether right shifting a negative integer extends the sign bit
 --- Lib/distutils/command/install.py
 +++ Lib/distutils/command/install.py
 @@ -29,8 +29,8 @@
@@ -89,7 +78,7 @@
          else:
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -120,7 +120,7 @@
+@@ -125,7 +125,7 @@
  MANDIR=		@mandir@
  INCLUDEDIR=	@includedir@
  CONFINCLUDEDIR=	$(exec_prefix)/include
@@ -98,6 +87,17 @@
  ABIFLAGS=	@ABIFLAGS@
  
  # Detailed destination directories
+--- Modules/Setup.dist
++++ Modules/Setup.dist
+@@ -358,7 +358,7 @@
+ # Andrew Kuchling's zlib module.
+ # This require zlib 1.1.3 (or later).
+ # See http://www.gzip.org/zlib/
+-#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz
++#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/@@GENTOO_LIBDIR@@ -lz
+ 
+ # Interface to the Expat XML parser
+ #
 --- Modules/getpath.c
 +++ Modules/getpath.c
 @@ -118,8 +118,8 @@
@@ -138,17 +138,17 @@
      }
      /* If we found EXEC_PREFIX do *not* reduce it!  (Yet.) */
  
---- Modules/Setup.dist
-+++ Modules/Setup.dist
-@@ -358,7 +358,7 @@
- # Andrew Kuchling's zlib module.
- # This require zlib 1.1.3 (or later).
- # See http://www.gzip.org/zlib/
--#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz
-+#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/@@GENTOO_LIBDIR@@ -lz
+--- configure.ac
++++ configure.ac
+@@ -4374,7 +4374,7 @@
  
- # Interface to the Expat XML parser
- #
+ dnl define LIBPL after ABIFLAGS and LDVERSION is defined.
+ AC_SUBST(PY_ENABLE_SHARED)
+-LIBPL='$(prefix)'"/lib/python${VERSION}/config-${LDVERSION}"
++LIBPL='$(prefix)'"/@@GENTOO_LIBDIR@@/python${VERSION}/config-${LDVERSION}"
+ AC_SUBST(LIBPL)
+ 
+ # Check whether right shifting a negative integer extends the sign bit
 --- setup.py
 +++ setup.py
 @@ -480,7 +480,7 @@
