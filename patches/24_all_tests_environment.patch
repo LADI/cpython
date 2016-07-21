@@ -29,7 +29,7 @@ https://bugs.python.org/issue1674555
  # Some times __path__ and __file__ are not absolute (e.g. while running from
 @@ -464,9 +465,62 @@
      test_support.use_resources = use_resources
-     save_modules = sys.modules.keys()
+     save_modules = set(sys.modules)
  
 +    opt_args = test_support.args_from_interpreter_flags()
 +    base_cmd = [sys.executable] + opt_args + ['-m', 'test.regrtest']
@@ -180,7 +180,7 @@ https://bugs.python.org/issue1674555
  
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -837,7 +837,7 @@
+@@ -893,7 +893,7 @@
  
  TESTOPTS=	-l $(EXTRATESTOPTS)
  TESTPROG=	$(srcdir)/Lib/test/regrtest.py
