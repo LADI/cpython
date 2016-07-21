@@ -24,7 +24,7 @@ https://bugs.python.org/issue6103
  
  commoninstall:  @FRAMEWORKALTINSTALLFIRST@ \
  		altbininstall libinstall inclinstall libainstall \
-@@ -1325,18 +1338,6 @@
+@@ -1324,18 +1337,6 @@
  		else	true; \
  		fi; \
  	done

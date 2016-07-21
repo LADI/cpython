@@ -95,6 +95,17 @@
  ABIFLAGS=	@ABIFLAGS@
  
  # Detailed destination directories
+--- Modules/Setup.dist
++++ Modules/Setup.dist
+@@ -358,7 +358,7 @@
+ # Andrew Kuchling's zlib module.
+ # This require zlib 1.1.3 (or later).
+ # See http://www.gzip.org/zlib/
+-#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz
++#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/@@GENTOO_LIBDIR@@ -lz
+ 
+ # Interface to the Expat XML parser
+ #
 --- Modules/getpath.c
 +++ Modules/getpath.c
 @@ -118,8 +118,8 @@
@@ -135,17 +146,17 @@
      }
      /* If we found EXEC_PREFIX do *not* reduce it!  (Yet.) */
  
---- Modules/Setup.dist
-+++ Modules/Setup.dist
-@@ -358,7 +358,7 @@
- # Andrew Kuchling's zlib module.
- # This require zlib 1.1.3 (or later).
- # See http://www.gzip.org/zlib/
--#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz
-+#zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/@@GENTOO_LIBDIR@@ -lz
+--- configure.ac
++++ configure.ac
+@@ -4115,7 +4115,7 @@
  
- # Interface to the Expat XML parser
- #
+ dnl define LIBPL after ABIFLAGS and LDVERSION is defined.
+ AC_SUBST(PY_ENABLE_SHARED)
+-LIBPL='$(prefix)'"/lib/python${VERSION}/config-${LDVERSION}"
++LIBPL='$(prefix)'"/@@GENTOO_LIBDIR@@/python${VERSION}/config-${LDVERSION}"
+ AC_SUBST(LIBPL)
+ 
+ # Check whether right shifting a negative integer extends the sign bit
 --- setup.py
 +++ setup.py
 @@ -462,7 +462,7 @@
@@ -223,14 +234,3 @@
  
          # If Cygwin, then verify that X is installed before proceeding
          if host_platform == 'cygwin':
---- configure.ac
-+++ configure.ac
-@@ -4374,7 +4374,7 @@
- 
- dnl define LIBPL after ABIFLAGS and LDVERSION is defined.
- AC_SUBST(PY_ENABLE_SHARED)
--LIBPL='$(prefix)'"/lib/python${VERSION}/config-${LDVERSION}"
-+LIBPL='$(prefix)'"/@@GENTOO_LIBDIR@@/python${VERSION}/config-${LDVERSION}"
- AC_SUBST(LIBPL)
- 
- # Check whether right shifting a negative integer extends the sign bit

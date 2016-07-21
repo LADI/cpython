@@ -1,5 +1,26 @@
 https://bugs.python.org/issue1222585
 
+--- Lib/_osx_support.py
++++ Lib/_osx_support.py
+@@ -14,13 +14,13 @@
+ # configuration variables that may contain universal build flags,
+ # like "-arch" or "-isdkroot", that may need customization for
+ # the user environment
+-_UNIVERSAL_CONFIG_VARS = ('CFLAGS', 'LDFLAGS', 'CPPFLAGS', 'BASECFLAGS',
+-                            'BLDSHARED', 'LDSHARED', 'CC', 'CXX',
+-                            'PY_CFLAGS', 'PY_LDFLAGS', 'PY_CPPFLAGS',
+-                            'PY_CORE_CFLAGS')
++_UNIVERSAL_CONFIG_VARS = ('CFLAGS', 'CXXFLAGS', 'LDFLAGS', 'CPPFLAGS',
++                          'BASECFLAGS', 'BLDSHARED', 'LDSHARED', 'LDCXXSHARED',
++                          'CC', 'CXX', 'PY_CFLAGS', 'PY_LDFLAGS',
++                          'PY_CPPFLAGS', 'PY_CORE_CFLAGS')
+ 
+ # configuration variables that may contain compiler calls
+-_COMPILER_CONFIG_VARS = ('BLDSHARED', 'LDSHARED', 'CC', 'CXX')
++_COMPILER_CONFIG_VARS = ('BLDSHARED', 'LDSHARED', 'LDCXXSHARED', 'CC', 'CXX')
+ 
+ # prefix added to original configuration variable names
+ _INITPRE = '_OSX_SUPPORT_INITIAL_'
 --- Lib/distutils/cygwinccompiler.py
 +++ Lib/distutils/cygwinccompiler.py
 @@ -125,8 +125,10 @@
@@ -206,27 +227,6 @@ https://bugs.python.org/issue1222585
  
                  if sys.platform == 'darwin':
                      linker = _osx_support.compiler_fixup(linker, ld_args)
---- Lib/_osx_support.py
-+++ Lib/_osx_support.py
-@@ -14,13 +14,13 @@
- # configuration variables that may contain universal build flags,
- # like "-arch" or "-isdkroot", that may need customization for
- # the user environment
--_UNIVERSAL_CONFIG_VARS = ('CFLAGS', 'LDFLAGS', 'CPPFLAGS', 'BASECFLAGS',
--                            'BLDSHARED', 'LDSHARED', 'CC', 'CXX',
--                            'PY_CFLAGS', 'PY_LDFLAGS', 'PY_CPPFLAGS',
--                            'PY_CORE_CFLAGS')
-+_UNIVERSAL_CONFIG_VARS = ('CFLAGS', 'CXXFLAGS', 'LDFLAGS', 'CPPFLAGS',
-+                          'BASECFLAGS', 'BLDSHARED', 'LDSHARED', 'LDCXXSHARED',
-+                          'CC', 'CXX', 'PY_CFLAGS', 'PY_LDFLAGS',
-+                          'PY_CPPFLAGS', 'PY_CORE_CFLAGS')
- 
- # configuration variables that may contain compiler calls
--_COMPILER_CONFIG_VARS = ('BLDSHARED', 'LDSHARED', 'CC', 'CXX')
-+_COMPILER_CONFIG_VARS = ('BLDSHARED', 'LDSHARED', 'LDCXXSHARED', 'CC', 'CXX')
- 
- # prefix added to original configuration variable names
- _INITPRE = '_OSX_SUPPORT_INITIAL_'
 --- Makefile.pre.in
 +++ Makefile.pre.in
 @@ -569,7 +569,7 @@
