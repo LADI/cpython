@@ -173,7 +173,7 @@ https://bugs.python.org/issue1222585
                    }
  
      if sys.platform[:6] == "darwin":
-@@ -108,12 +111,19 @@
+@@ -110,12 +113,19 @@
  
      def _compile(self, obj, src, ext, cc_args, extra_postargs, pp_opts):
          compiler_so = self.compiler_so
@@ -195,7 +195,7 @@ https://bugs.python.org/issue1222585
          except DistutilsExecError as msg:
              raise CompileError(msg)
  
-@@ -171,22 +181,16 @@
+@@ -173,22 +183,16 @@
                  ld_args.extend(extra_postargs)
              self.mkpath(os.path.dirname(output_filename))
              try:
@@ -229,7 +229,7 @@ https://bugs.python.org/issue1222585
                      linker = _osx_support.compiler_fixup(linker, ld_args)
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -595,7 +595,7 @@
+@@ -602,7 +602,7 @@
  	    *\ -s*|s*) quiet="-q";; \
  	    *) quiet="";; \
  	esac; \
