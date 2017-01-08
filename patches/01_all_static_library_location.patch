@@ -4,7 +4,7 @@ https://bugs.python.org/issue6103
 
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -1061,6 +1061,19 @@
+@@ -1065,6 +1065,19 @@
  		$(RUNSHARED) $(PYTHON_FOR_BUILD) -m ensurepip \
  			$$ensurepip --root=$(DESTDIR)/ ; \
  	fi
@@ -24,7 +24,7 @@ https://bugs.python.org/issue6103
  
  commoninstall:  @FRAMEWORKALTINSTALLFIRST@ \
  		altbininstall libinstall inclinstall libainstall \
-@@ -1398,18 +1411,6 @@
+@@ -1388,18 +1401,6 @@
  		else	true; \
  		fi; \
  	done
@@ -82,7 +82,7 @@ https://bugs.python.org/issue6103
              echo "$SO"
 --- Modules/makesetup
 +++ Modules/makesetup
-@@ -89,7 +89,7 @@
+@@ -90,7 +90,7 @@
  	 then
  	 	ExtraLibDir=.
  	 else
