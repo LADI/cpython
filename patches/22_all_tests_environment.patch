@@ -27,7 +27,7 @@ https://bugs.python.org/issue1674555
  
  try:
      import threading
-@@ -434,7 +435,6 @@
+@@ -437,7 +438,6 @@
      subprocess exits, its return code, stdout and stderr are returned as a
      3-tuple.
      """
@@ -35,7 +35,7 @@ https://bugs.python.org/issue1674555
      base_cmd = ([sys.executable] + support.args_from_interpreter_flags() +
                  ['-X', 'faulthandler', '-m', 'test.regrtest'])
      # required to spawn a new process with PGO flag on/off
-@@ -657,9 +657,62 @@
+@@ -660,9 +660,62 @@
      support.use_resources = ns.use_resources
      save_modules = sys.modules.keys()
  
@@ -99,7 +99,7 @@ https://bugs.python.org/issue1674555
              test_times.append((test_time, test))
          if ok == PASSED:
              good.append(test)
-@@ -773,15 +826,15 @@
+@@ -776,15 +829,15 @@
              if ns.trace:
                  # If we're tracing code coverage, then we don't exit with status
                  # if on a false return value from main.
@@ -121,7 +121,7 @@ https://bugs.python.org/issue1674555
                      accumulate_result(test, result)
                  except KeyboardInterrupt:
                      interrupted = True
-@@ -835,8 +888,8 @@
+@@ -838,8 +891,8 @@
              sys.stdout.flush()
              try:
                  ns.verbose = True
@@ -132,7 +132,7 @@ https://bugs.python.org/issue1674555
              except KeyboardInterrupt:
                  # print a newline separate from the ^C
                  print()
-@@ -1261,8 +1314,9 @@
+@@ -1259,8 +1312,9 @@
          for name, get, restore in self.resource_info():
              current = get()
              original = saved_values.pop(name)
@@ -179,7 +179,7 @@ https://bugs.python.org/issue1674555
          stdout, stderr = popen.communicate()
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -1016,7 +1016,7 @@
+@@ -1002,7 +1002,7 @@
  ######################################################################
  
  TESTOPTS=	$(EXTRATESTOPTS)

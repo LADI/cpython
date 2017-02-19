@@ -78,7 +78,7 @@
          else:
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -125,7 +125,7 @@
+@@ -126,7 +126,7 @@
  MANDIR=		@mandir@
  INCLUDEDIR=	@includedir@
  CONFINCLUDEDIR=	$(exec_prefix)/include
@@ -129,7 +129,7 @@
  
 --- configure.ac
 +++ configure.ac
-@@ -4456,7 +4456,7 @@
+@@ -4524,7 +4524,7 @@
  
  dnl define LIBPL after ABIFLAGS and LDVERSION is defined.
  AC_SUBST(PY_ENABLE_SHARED)
@@ -140,7 +140,7 @@
  # Check whether right shifting a negative integer extends the sign bit
 --- setup.py
 +++ setup.py
-@@ -503,7 +503,7 @@
+@@ -502,7 +502,7 @@
          # directories (i.e. '.' and 'Include') must be first.  See issue
          # 10520.
          if not cross_compiling:
@@ -149,7 +149,7 @@
              add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
          # only change this for cross builds for 3.3, issues on Mageia
          if cross_compiling:
-@@ -560,8 +560,7 @@
+@@ -559,8 +559,7 @@
          # be assumed that no additional -I,-L directives are needed.
          if not cross_compiling:
              lib_dirs = self.compiler.library_dirs + [
@@ -159,7 +159,7 @@
                  ]
              inc_dirs = self.compiler.include_dirs + ['/usr/include']
          else:
-@@ -791,11 +790,11 @@
+@@ -790,11 +789,11 @@
              elif curses_library:
                  readline_libs.append(curses_library)
              elif self.compiler.find_library_file(lib_dirs +
@@ -173,7 +173,7 @@
                                     extra_link_args=readline_extra_link_args,
                                     libraries=readline_libs) )
          else:
-@@ -1052,8 +1051,7 @@
+@@ -1051,8 +1050,7 @@
  
                  # check lib directories parallel to the location of the header
                  db_dirs_to_check = [
@@ -183,7 +183,7 @@
                  ]
  
                  if host_platform != 'darwin':
-@@ -1164,10 +1162,8 @@
+@@ -1163,10 +1161,8 @@
  
          if sqlite_incdir:
              sqlite_dirs_to_check = [
@@ -196,7 +196,7 @@
              ]
              sqlite_libfile = self.compiler.find_library_file(
                                  sqlite_dirs_to_check + lib_dirs, 'sqlite3')
-@@ -1815,15 +1811,14 @@
+@@ -1814,15 +1810,14 @@
              added_lib_dirs.append('/usr/openwin/lib')
          elif os.path.exists('/usr/X11R6/include'):
              include_dirs.append('/usr/X11R6/include')
