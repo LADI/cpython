@@ -2,7 +2,7 @@ https://bugs.python.org/issue1674555
 
 --- Lib/site.py
 +++ Lib/site.py
-@@ -527,8 +527,12 @@
+@@ -518,8 +518,12 @@
      known_paths = removeduppaths()
      if ENABLE_USER_SITE is None:
          ENABLE_USER_SITE = check_enableusersite()
@@ -180,7 +180,7 @@ https://bugs.python.org/issue1674555
  
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -893,7 +893,7 @@
+@@ -881,7 +881,7 @@
  
  TESTOPTS=	-l $(EXTRATESTOPTS)
  TESTPROG=	$(srcdir)/Lib/test/regrtest.py

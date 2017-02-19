@@ -37,16 +37,16 @@ https://bugs.python.org/issue12619
 +python$EXE ../../Tools/scripts/h2py.py /usr/include/sys/stropts.h
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -430,7 +430,7 @@
+@@ -429,7 +429,7 @@
  
  # Default target
- all:		build_all
+ all:		@DEF_MAKE_ALL_RULE@
 -build_all:	$(BUILDPYTHON) oldsharedmods sharedmods gdbhooks
 +build_all:	$(BUILDPYTHON) oldsharedmods sharedmods platformspecificmods gdbhooks
  
  # Compile a binary with profile guided optimization.
  profile-opt:
-@@ -548,6 +548,32 @@
+@@ -547,6 +547,32 @@
  		_TCLTK_INCLUDES='$(TCLTK_INCLUDES)' _TCLTK_LIBS='$(TCLTK_LIBS)' \
  		$(PYTHON_FOR_BUILD) $(srcdir)/setup.py $$quiet build
  
@@ -79,7 +79,7 @@ https://bugs.python.org/issue12619
  # Build static library
  # avoid long command lines, same as LIBRARY_OBJS
  $(LIBRARY): $(LIBRARY_OBJS)
-@@ -1085,7 +1111,7 @@
+@@ -1073,7 +1099,7 @@
  		unittest unittest/test \
  		lib-old \
  		curses pydoc_data $(MACHDEPS)
@@ -88,7 +88,7 @@ https://bugs.python.org/issue12619
  	@for i in $(SCRIPTDIR) $(LIBDEST); \
  	do \
  		if test ! -d $(DESTDIR)$$i; then \
-@@ -1168,23 +1194,6 @@
+@@ -1156,23 +1182,6 @@
  	-PYTHONPATH=$(DESTDIR)$(LIBDEST) $(RUNSHARED) \
  		$(PYTHON_FOR_BUILD) -m lib2to3.pgen2.driver $(DESTDIR)$(LIBDEST)/lib2to3/PatternGrammar.txt
  
@@ -112,7 +112,7 @@ https://bugs.python.org/issue12619
  python-config: $(srcdir)/Misc/python-config.in
  	# Substitution happens here, as the completely-expanded BINDIR
  	# is not available in configure
-@@ -1481,7 +1490,7 @@
+@@ -1473,7 +1482,7 @@
  Python/thread.o: @THREADHEADERS@
  
  # Declare targets that aren't real files
