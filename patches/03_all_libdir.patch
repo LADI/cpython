@@ -13,7 +13,7 @@
          'data'   : '$base',
 --- Lib/distutils/sysconfig.py
 +++ Lib/distutils/sysconfig.py
-@@ -133,7 +133,7 @@
+@@ -130,7 +130,7 @@
  
      if os.name == "posix":
          libpython = os.path.join(prefix,
@@ -67,7 +67,7 @@
          'data': '{userbase}',
 --- Lib/test/test_site.py
 +++ Lib/test/test_site.py
-@@ -249,7 +249,7 @@
+@@ -262,7 +262,7 @@
          elif os.sep == '/':
              # OS X non-framwework builds, Linux, FreeBSD, etc
              self.assertEqual(len(dirs), 1)
@@ -78,7 +78,7 @@
          else:
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -126,7 +126,7 @@
+@@ -128,7 +128,7 @@
  MANDIR=		@mandir@
  INCLUDEDIR=	@includedir@
  CONFINCLUDEDIR=	$(exec_prefix)/include
@@ -129,7 +129,7 @@
  
 --- configure.ac
 +++ configure.ac
-@@ -4524,7 +4524,7 @@
+@@ -4535,7 +4535,7 @@
  
  dnl define LIBPL after ABIFLAGS and LDVERSION is defined.
  AC_SUBST(PY_ENABLE_SHARED)
