@@ -71,7 +71,7 @@
          'data'   : '{userbase}',
 --- Lib/test/test_site.py
 +++ Lib/test/test_site.py
-@@ -236,10 +236,10 @@
+@@ -253,10 +253,10 @@
          elif os.sep == '/':
              # OS X, Linux, FreeBSD, etc
              self.assertEqual(len(dirs), 2)
@@ -86,7 +86,7 @@
              # other platforms
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -111,7 +111,7 @@
+@@ -110,7 +110,7 @@
  MANDIR=		@mandir@
  INCLUDEDIR=	@includedir@
  CONFINCLUDEDIR=	$(exec_prefix)/include
@@ -193,7 +193,7 @@
              ]
              sqlite_libfile = self.compiler.find_library_file(
                                  sqlite_dirs_to_check + lib_dirs, 'sqlite3')
-@@ -1953,15 +1949,14 @@
+@@ -1956,15 +1952,14 @@
              added_lib_dirs.append('/usr/openwin/lib')
          elif os.path.exists('/usr/X11R6/include'):
              include_dirs.append('/usr/X11R6/include')
