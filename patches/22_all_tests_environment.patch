@@ -19,7 +19,7 @@ https://bugs.python.org/issue1674555
      sethelper()
 --- Lib/test/libregrtest/main.py
 +++ Lib/test/libregrtest/main.py
-@@ -103,7 +103,7 @@
+@@ -110,7 +110,7 @@
  
      def accumulate_result(self, test, result):
          ok, test_time = result
@@ -28,6 +28,15 @@ https://bugs.python.org/issue1674555
              self.test_times.append((test_time, test))
          if ok == PASSED:
              self.good.append(test)
+@@ -123,7 +123,7 @@
+         elif ok == RESOURCE_DENIED:
+             self.skipped.append(test)
+             self.resource_denieds.append(test)
+-        elif ok != INTERRUPTED:
++        elif ok not in (None, INTERRUPTED):
+             raise ValueError("invalid test result: %r" % ok)
+ 
+     def display_progress(self, test_index, test):
 --- Lib/test/libregrtest/runtest.py
 +++ Lib/test/libregrtest/runtest.py
 @@ -1,6 +1,7 @@
@@ -38,8 +47,8 @@ https://bugs.python.org/issue1674555
  import os
  import sys
  import time
-@@ -71,7 +72,7 @@
-     return stdtests + sorted(tests)
+@@ -79,7 +80,7 @@
+         return 'test.' + test
  
  
 -def runtest(ns, test):
@@ -47,16 +56,16 @@ https://bugs.python.org/issue1674555
      """Run a single test.
  
      ns -- regrtest namespace of options
-@@ -90,6 +91,25 @@
+@@ -98,6 +99,25 @@
  
      output_on_failure = ns.verbose3
  
 +    if not slave and test == "test_site":
 +        retcode, stdout, stderr = run_test_in_subprocess(test, ns)
-+        stdout, _, result = stdout.strip().rpartition("\n")
 +        if retcode != 0:
 +            result = (CHILD_ERROR, None)
 +        else:
++            stdout, _, result = stdout.strip().rpartition("\n")
 +            if not result:
 +                return (None, None)
 +            result = json.loads(result)
@@ -73,7 +82,7 @@ https://bugs.python.org/issue1674555
      use_timeout = (ns.timeout is not None)
      if use_timeout:
          faulthandler.dump_traceback_later(ns.timeout, exit=True)
-@@ -135,6 +155,41 @@
+@@ -143,6 +163,41 @@
  runtest.stringio = None
  
  
@@ -92,7 +101,7 @@ https://bugs.python.org/issue1674555
 +    slaveargs = json.dumps(slaveargs)
 +
 +    cmd = [sys.executable, *support.args_from_interpreter_flags(),
-+           '-X', 'faulthandler',
++           '-u',    # Unbuffered stdout and stderr
 +           '-m', 'test.regrtest',
 +           '--slaveargs', slaveargs]
 +    if ns.pgo:
@@ -158,7 +167,7 @@ https://bugs.python.org/issue1674555
 -    slaveargs = json.dumps(slaveargs)
 -
 -    cmd = [sys.executable, *support.args_from_interpreter_flags(),
--           '-X', 'faulthandler',
+-           '-u',    # Unbuffered stdout and stderr
 -           '-m', 'test.regrtest',
 -           '--slaveargs', slaveargs]
 -    if ns.pgo:
@@ -190,20 +199,6 @@ https://bugs.python.org/issue1674555
      except KeyboardInterrupt:
          result = INTERRUPTED, ''
      except BaseException as e:
---- Lib/test/libregrtest/save_env.py
-+++ Lib/test/libregrtest/save_env.py
-@@ -272,8 +272,9 @@
-         for name, get, restore in self.resource_info():
-             current = get()
-             original = saved_values.pop(name)
--            # Check for changes to the resource's value
--            if current != original:
-+            # Check for changes to the resource's value. test_site is always run
-+            # in a subprocess and is allowed to change os.environ and sys.path.
-+            if current != original and self.testname != "test_site":
-                 self.changed = True
-                 restore(original)
-                 if not self.quiet and not self.pgo:
 --- Lib/test/test_site.py
 +++ Lib/test/test_site.py
 @@ -8,6 +8,7 @@
@@ -214,18 +209,36 @@ https://bugs.python.org/issue1674555
  import os
  import sys
  import re
-@@ -27,6 +28,10 @@
+@@ -29,12 +30,19 @@
  
- import site
  
-+if "_PYTHONNOSITEPACKAGES" in os.environ:
-+    del os.environ["_PYTHONNOSITEPACKAGES"]
-+    importlib.reload(site)
+ OLD_SYS_PATH = None
++OLD__PYTHONNOSITEPACKAGES = None
+ 
+ 
+ def setUpModule():
+     global OLD_SYS_PATH
+     OLD_SYS_PATH = sys.path[:]
+ 
++    if "_PYTHONNOSITEPACKAGES" in os.environ:
++        global OLD__PYTHONNOSITEPACKAGES
++        OLD__PYTHONNOSITEPACKAGES = os.environ.get("_PYTHONNOSITEPACKAGES")
++        del os.environ["_PYTHONNOSITEPACKAGES"]
++        importlib.reload(site)
 +
- if site.ENABLE_USER_SITE and not os.path.isdir(site.USER_SITE):
-     # need to add user site directory for tests
-     try:
-@@ -443,8 +448,11 @@
+     if site.ENABLE_USER_SITE and not os.path.isdir(site.USER_SITE):
+         # need to add user site directory for tests
+         try:
+@@ -48,6 +56,8 @@
+ 
+ def tearDownModule():
+     sys.path[:] = OLD_SYS_PATH
++    if OLD__PYTHONNOSITEPACKAGES is not None:
++        os.environ["_PYTHONNOSITEPACKAGES"] = OLD__PYTHONNOSITEPACKAGES
+ 
+ 
+ class HelperFunctionsTests(unittest.TestCase):
+@@ -456,8 +466,11 @@
      def test_startup_imports(self):
          # This tests checks which modules are loaded by Python when it
          # initially starts upon startup.
@@ -239,7 +252,7 @@ https://bugs.python.org/issue1674555
                                   encoding='utf-8')
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -994,7 +994,7 @@
+@@ -997,7 +997,7 @@
  ######################################################################
  
  TESTOPTS=	$(EXTRATESTOPTS)

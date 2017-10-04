@@ -81,7 +81,7 @@ https://bugs.python.org/issue1222585
          # dlls need another dll (mingwm10.dll see Mingw32 docs)
 --- Lib/distutils/sysconfig.py
 +++ Lib/distutils/sysconfig.py
-@@ -173,9 +173,12 @@
+@@ -170,9 +170,12 @@
                  _osx_support.customize_compiler(_config_vars)
                  _config_vars['CUSTOMIZED_OSX_COMPILER'] = 'True'
  
@@ -97,7 +97,7 @@ https://bugs.python.org/issue1222585
  
          if 'CC' in os.environ:
              newcc = os.environ['CC']
-@@ -190,19 +193,27 @@
+@@ -187,19 +190,27 @@
              cxx = os.environ['CXX']
          if 'LDSHARED' in os.environ:
              ldshared = os.environ['LDSHARED']
@@ -126,7 +126,7 @@ https://bugs.python.org/issue1222585
          if 'AR' in os.environ:
              ar = os.environ['AR']
          if 'ARFLAGS' in os.environ:
-@@ -211,13 +222,17 @@
+@@ -208,13 +219,17 @@
              archiver = ar + ' ' + ar_flags
  
          cc_cmd = cc + ' ' + cflags
@@ -229,7 +229,7 @@ https://bugs.python.org/issue1222585
                      linker = _osx_support.compiler_fixup(linker, ld_args)
 --- Makefile.pre.in
 +++ Makefile.pre.in
-@@ -604,7 +604,7 @@
+@@ -573,7 +573,7 @@
  	    *\ -s*|s*) quiet="-q";; \
  	    *) quiet="";; \
  	esac; \
