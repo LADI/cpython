@@ -288,10 +288,10 @@ def getsitepackages():
         if sys.platform in ('os2emx', 'riscos'):
             sitepackages.append(os.path.join(prefix, "Lib", "site-packages"))
         elif os.sep == '/':
-            sitepackages.append(os.path.join(prefix, "lib",
+            sitepackages.append(os.path.join(prefix, "@@GENTOO_LIBDIR@@",
                                         "python" + sys.version[:3],
                                         "site-packages"))
-            sitepackages.append(os.path.join(prefix, "lib", "site-python"))
+            sitepackages.append(os.path.join(prefix, "@@GENTOO_LIBDIR@@", "site-python"))
         else:
             sitepackages.append(prefix)
             sitepackages.append(os.path.join(prefix, "lib", "site-packages"))
