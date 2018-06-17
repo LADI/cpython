@@ -46,6 +46,8 @@ else:
     disable_ssl = 0
  
 
+exit_status = 0
+
 def add_dir_to_list(dirlist, dir):
     """Add the directory 'dir' to the list 'dirlist' (at the front) if
     1) 'dir' is not already in 'dirlist'
@@ -347,7 +349,10 @@ class PyBuildExt(build_ext):
                    " detect_modules() for the module's name.")
             print
 
+        global exit_status
+
         if self.failed:
+            exit_status = 1
             failed = self.failed[:]
             print
             print "Failed to build these modules:"
@@ -2353,6 +2358,7 @@ def main():
                      'Tools/scripts/2to3',
                      'Lib/smtpd.py']
         )
+    sys.exit(exit_status)
 
 # --install-platlib
 if __name__ == '__main__':
