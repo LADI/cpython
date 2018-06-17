@@ -5,4 +5,4 @@ case `uname -sv` in
         exit 1;;
 esac
 set -v
-h2py.py -i '(u_long)' /usr/include/netinet/in.h
+python$EXE ../../Tools/scripts/h2py.py -i '(u_long)' /usr/include/netinet/in.h
