@@ -384,6 +384,26 @@ class HeaderTests(TestCase):
             with self.assertRaisesRegexp(ValueError, 'Invalid header'):
                 conn.putheader(name, value)
 
+    def test_invalid_method_names(self):
+        methods = (
+            'GET\r',
+            'POST\n',
+            'PUT\n\r',
+            'POST\nValue',
+            'POST\nHOST:abc',
+            'GET\nrHost:abc\n',
+            'POST\rRemainder:\r',
+            'GET\rHOST:\n',
+            '\nPUT'
+        )
+
+        for method in methods:
+            with self.assertRaisesRegexp(
+                    ValueError, "method can't contain control characters"):
+                conn = httplib.HTTPConnection('example.com')
+                conn.sock = FakeSocket(None)
+                conn.request(method=method, url="/")
+
 
 class BasicTest(TestCase):
     def test_status_lines(self):
