@@ -76,6 +76,10 @@
 #include "openssl/rand.h"
 #include "openssl/dh.h"
 
+#ifndef OPENSSL_NO_SSL3
+#  define OPENSSL_NO_SSL3 1
+#endif
+
 /* SSL error object */
 static PyObject *PySSLErrorObject;
 static PyObject *PySSLZeroReturnErrorObject;
