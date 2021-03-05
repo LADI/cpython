@@ -2,6 +2,7 @@
 #   Common Unittest Routines for CJK codecs
 #
 
+import binascii
 import codecs
 import os
 import re
@@ -280,7 +281,7 @@ class TestBase_Mapping(unittest.TestCase):
 
     def _test_mapping_file_plain(self):
         def unichrs(s):
-            return ''.join(chr(int(x, 16)) for x in s.split('+'))
+            return ''.join(unichr(int(x, 16)) for x in s.split('+'))
 
         urt_wa = {}
 
@@ -294,7 +295,7 @@ class TestBase_Mapping(unittest.TestCase):
 
                 if data[0][:2] != '0x':
                     self.fail("Invalid line: {line!r}".format(line=line))
-                csetch = bytes.fromhex(data[0][2:])
+                csetch = binascii.a2b_hex(data[0][2:])
                 if len(csetch) == 1 and 0x80 <= csetch[0]:
                     continue
 
