@@ -338,3 +338,23 @@
  
      # strip spurious spaces
      for k, v in done.items():
+--- a/Lib/distutils/tests/test_sysconfig.py
++++ b/Lib/distutils/tests/test_sysconfig.py
+@@ -60,7 +60,7 @@ def test_parse_makefile_base(self):
+             fd.close()
+         d = sysconfig.parse_makefile(self.makefile)
+         self.assertEqual(d, {'CONFIG_ARGS': "'--arg1=optarg1' 'ENV=LIB'",
+-                             'OTHER': 'foo'})
++                             'OTHER': 'foo', 'VAR': '$OTHER'})
+
+     def test_parse_makefile_literal_dollar(self):
+         self.makefile = test.test_support.TESTFN
+@@ -72,7 +72,7 @@ def test_parse_makefile_literal_dollar(self):
+             fd.close()
+         d = sysconfig.parse_makefile(self.makefile)
+         self.assertEqual(d, {'CONFIG_ARGS': r"'--arg1=optarg1' 'ENV=\$LIB'",
+-                             'OTHER': 'foo'})
++                             'OTHER': 'foo', 'VAR': '$OTHER'})
+
+
+     def test_sysconfig_module(self):

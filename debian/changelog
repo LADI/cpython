@@ -1,3 +1,20 @@
+python2.7 (2.7.18-8+deb11u1) bullseye; urgency=medium
+
+  * Non-maintainer upload by the LTS Team.
+  * Add testsuite-fix-with-expat.diff: Fix autopkgtests with updated expat.
+  * Fix issue9189.diff: Update test suite to match behaviour change.
+  * Add CVE-2021-23336.diff: Only use '&' as query string separator
+  * Add CVE-2022-0391.diff: Make urlsplit robust against newlines
+  * Add CVE-2022-48560.diff: Fix use-after-free in heapq module.
+  * Add CVE-2022-48565.diff: Reject entities declarations while parsing XML
+    plists.
+  * Add CVE-2022-48566.diff: Make constant time comparison more constant-time.
+  * Add CVE-2023-24329.diff: More WHATWG-compatible URL parsing
+  * Add CVE-2023-40217.diff: Prevent reading unauthenticated data on a
+    SSLSocket
+
+ -- Helmut Grohne <helmut@subdivi.de>  Tue, 19 Sep 2023 09:10:59 +0200
+
 python2.7 (2.7.18-13) unstable; urgency=medium
 
   * Skip tests requiring TLS 1.2 under OpenSSL 3.
