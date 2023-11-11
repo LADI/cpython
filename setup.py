@@ -578,17 +578,24 @@ class PyBuildExt(build_ext):
         # lib_dirs and inc_dirs are used to search for files;
         # if a file is found in one of those directories, it can
         # be assumed that no additional -I,-L directives are needed.
-        inc_dirs = self.compiler.include_dirs[:]
-        lib_dirs = self.compiler.library_dirs[:]
+        inc_dirs = []
+        lib_dirs = []
         if not cross_compiling:
             for d in (
+                '/usr/include',
                 os.path.normpath(sys.prefix) + "/include",
                 ):
                 add_dir_to_list(inc_dirs, d)
             for d in (
+                '/lib', '/usr/lib',
+                '/lib64', '/usr/lib64',
                 os.path.normpath(sys.prefix) + "/lib",
                 ):
                 add_dir_to_list(lib_dirs, d)
+
+        inc_dirs += self.compiler.include_dirs[:]
+        lib_dirs += self.compiler.library_dirs[:]
+
         exts = []
         missing = []
 
@@ -903,7 +910,6 @@ class PyBuildExt(build_ext):
         openssl_ver_re = re.compile(
             '^\s*#\s*define\s+OPENSSL_VERSION_NUMBER\s+(0x[0-9a-fA-F]+)' )
 
-        # look for the openssl version header on the compiler search path.
         opensslv_h = find_file('openssl/opensslv.h', [],
                 inc_dirs + search_for_ssl_incs_in)
         if opensslv_h:
