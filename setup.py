@@ -582,12 +582,11 @@ class PyBuildExt(build_ext):
         lib_dirs = self.compiler.library_dirs[:]
         if not cross_compiling:
             for d in (
-                '/usr/include',
+                os.path.normpath(sys.prefix) + "/include",
                 ):
                 add_dir_to_list(inc_dirs, d)
             for d in (
-                '/lib64', '/usr/lib64',
-                '/lib', '/usr/lib',
+                os.path.normpath(sys.prefix) + "/lib",
                 ):
                 add_dir_to_list(lib_dirs, d)
         exts = []
