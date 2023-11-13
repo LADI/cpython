@@ -87,3 +87,7 @@ coverage/
 externals/
 htmlcov/
 gmon.out
+/Lib/plat-linux2/CDROM.py
+/Lib/plat-linux2/DLFCN.py
+/Lib/plat-linux2/IN.py
+/Lib/plat-linux2/TYPES.py
